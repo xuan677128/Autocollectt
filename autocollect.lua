@@ -157,7 +157,7 @@ end)
 -- Button logic
 toggleBtn.MouseButton1Click:Connect(function()
 	active = not active
-	toggleBtn.Text = active and "⏹ STOP COLLECTING" or "START COLLECTING"
+	toggleBtn.Text = active and "STOP COLLECTING" or "START COLLECTING"
 	btnGradient.Color = active and ColorSequence.new{
 		ColorSequenceKeypoint.new(0, Color3.fromRGB(239, 68, 68)),
 		ColorSequenceKeypoint.new(1, Color3.fromRGB(185, 28, 28))
@@ -166,3 +166,4 @@ toggleBtn.MouseButton1Click:Connect(function()
 		ColorSequenceKeypoint.new(1, Color3.fromRGB(219, 39, 119))
 	}
 end)
+
