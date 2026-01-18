@@ -166,4 +166,3 @@ toggleBtn.MouseButton1Click:Connect(function()
 		ColorSequenceKeypoint.new(1, Color3.fromRGB(219, 39, 119))
 	}
 end)
-
