@@ -55,13 +55,6 @@ version.TextColor3 = Color3.fromRGB(255, 255, 255)
 version.Font = Enum.Font.GothamBold
 version.TextSize = 11
 
-local shadow = Instance.new("ImageLabel", frame)
-shadow.Size = UDim2.new(1, 20, 1, 20)
-shadow.Position = UDim2.new(0, -10, 0, -10)
-shadow.BackgroundTransparency = 1
-shadow.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
-shadow.ImageTransparency = 0.8
-shadow.ZIndex = 0
 
 local toggleBtn = Instance.new("TextButton", frame)
 toggleBtn.Size = UDim2.new(0.9, 0, 0, 50)
@@ -166,4 +159,5 @@ toggleBtn.MouseButton1Click:Connect(function()
 		ColorSequenceKeypoint.new(1, Color3.fromRGB(219, 39, 119))
 	}
 end)
+
 
