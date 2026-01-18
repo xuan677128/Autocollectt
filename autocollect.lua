@@ -66,7 +66,7 @@ shadow.ZIndex = 0
 local toggleBtn = Instance.new("TextButton", frame)
 toggleBtn.Size = UDim2.new(0.9, 0, 0, 50)
 toggleBtn.Position = UDim2.new(0.05, 0, 0, 55)
-togggleBtn.BackgroundColor3 = Color3.fromRGB(255, 20, 147)
+toggleBtn.BackgroundColor3 = Color3.fromRGB(255, 20, 147)
 toggleBtn.TextColor3 = Color3.new(0,0,0)
 toggleBtn.Font = Enum.Font.GothamBold
 toggleBtn.TextSize = 18
@@ -166,3 +166,4 @@ toggleBtn.MouseButton1Click:Connect(function()
 		ColorSequenceKeypoint.new(1, Color3.fromRGB(219, 39, 119))
 	}
 end)
+
