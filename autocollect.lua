@@ -13,7 +13,7 @@ gui.IgnoreGuiInset = true
 gui.Parent = player:WaitForChild("PlayerGui")
 
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 240, 0, 100)
+frame.Size = UDim2.new(0, 240, 0, 145)
 frame.Position = UDim2.new(0.5, -120, 0.15, 0)
 frame.BackgroundColor3 = Color3.fromRGB(255, 240, 245)
 frame.BorderSizePixel = 2
@@ -47,38 +47,79 @@ title.TextSize = 14
 title.TextXAlignment = Enum.TextXAlignment.Center
 
 
+local shadow = Instance.new("ImageLabel", frame)
+shadow.Size = UDim2.new(1, 20, 1, 20)
+shadow.Position = UDim2.new(0, -10, 0, -10)
+shadow.BackgroundTransparency = 1
+shadow.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+shadow.ImageTransparency = 0.8
+shadow.ZIndex = 0
 
-local toggleBtn = Instance.new("TextButton", frame)
-toggleBtn.Size = UDim2.new(0.9, 0, 0, 42)
-toggleBtn.Position = UDim2.new(0.05, 0, 0, 45)
-toggleBtn.BackgroundColor3 = Color3.fromRGB(255, 20, 147)
-toggleBtn.TextColor3 = Color3.new(0,0,0)
-toggleBtn.Font = Enum.Font.GothamBold
-toggleBtn.TextSize = 15
-toggleBtn.Text = "START COLLECTING"
-toggleBtn.AutoButtonColor = false
-Instance.new("UICorner", toggleBtn).CornerRadius = UDim.new(0, 10)
+local collectBtn = Instance.new("TextButton", frame)
+collectBtn.Size = UDim2.new(0.9, 0, 0, 38)
+collectBtn.Position = UDim2.new(0.05, 0, 0, 40)
+collectBtn.BackgroundColor3 = Color3.fromRGB(255, 20, 147)
+collectBtn.TextColor3 = Color3.new(0,0,0)
+collectBtn.Font = Enum.Font.GothamBold
+collectBtn.TextSize = 14
+collectBtn.Text = "START COLLECTING"
+collectBtn.AutoButtonColor = false
+Instance.new("UICorner", collectBtn).CornerRadius = UDim.new(0, 10)
 
-local btnGradient = Instance.new("UIGradient", toggleBtn)
+local btnGradient = Instance.new("UIGradient", collectBtn)
 btnGradient.Color = ColorSequence.new{
 	ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 20, 147)),
 	ColorSequenceKeypoint.new(1, Color3.fromRGB(219, 39, 119))
 }
 btnGradient.Rotation = 90
 
-local btnStroke = Instance.new("UIStroke", toggleBtn)
+local btnStroke = Instance.new("UIStroke", collectBtn)
 btnStroke.Color = Color3.fromRGB(255, 255, 255)
 btnStroke.Thickness = 1.5
 btnStroke.Transparency = 0.7
 
--- Hover effect
-toggleBtn.MouseEnter:Connect(function()
-	toggleBtn.Size = UDim2.new(0.92, 0, 0, 44)
-	toggleBtn.Position = UDim2.new(0.04, 0, 0, 44)
+-- Hover effect for collect button
+collectBtn.MouseEnter:Connect(function()
+	collectBtn.Size = UDim2.new(0.92, 0, 0, 40)
+	collectBtn.Position = UDim2.new(0.04, 0, 0, 39)
 end)
-toggleBtn.MouseLeave:Connect(function()
-	toggleBtn.Size = UDim2.new(0.9, 0, 0, 42)
-	toggleBtn.Position = UDim2.new(0.05, 0, 0, 45)
+collectBtn.MouseLeave:Connect(function()
+	collectBtn.Size = UDim2.new(0.9, 0, 0, 38)
+	collectBtn.Position = UDim2.new(0.05, 0, 0, 40)
+end)
+
+-- Auto Spin Button
+local spinBtn = Instance.new("TextButton", frame)
+spinBtn.Size = UDim2.new(0.9, 0, 0, 38)
+spinBtn.Position = UDim2.new(0.05, 0, 0, 95)
+spinBtn.BackgroundColor3 = Color3.fromRGB(255, 20, 147)
+spinBtn.TextColor3 = Color3.new(0,0,0)
+spinBtn.Font = Enum.Font.GothamBold
+spinBtn.TextSize = 14
+spinBtn.Text = "START SPINNING"
+spinBtn.AutoButtonColor = false
+Instance.new("UICorner", spinBtn).CornerRadius = UDim.new(0, 10)
+
+local spinGradient = Instance.new("UIGradient", spinBtn)
+spinGradient.Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 20, 147)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(219, 39, 119))
+}
+spinGradient.Rotation = 90
+
+local spinStroke = Instance.new("UIStroke", spinBtn)
+spinStroke.Color = Color3.fromRGB(255, 255, 255)
+spinStroke.Thickness = 1.5
+spinStroke.Transparency = 0.7
+
+-- Hover effect for spin button
+spinBtn.MouseEnter:Connect(function()
+	spinBtn.Size = UDim2.new(0.92, 0, 0, 40)
+	spinBtn.Position = UDim2.new(0.04, 0, 0, 94)
+end)
+spinBtn.MouseLeave:Connect(function()
+	spinBtn.Size = UDim2.new(0.9, 0, 0, 38)
+	spinBtn.Position = UDim2.new(0.05, 0, 0, 95)
 end)
 
 -- ================= FUNCTIONALITY LOGIC =================
@@ -86,9 +127,10 @@ end)
 local character, humanoidRootPart
 local EventFolder = nil
 
-local PullDelay = 0.05
-local HeightOffset = 1
+local PullDelay = 0.1
+local HeightOffset = 3
 local active = false
+local spinning = false
 
 -- Character handler (safe)
 local function setupCharacter(char)
@@ -139,10 +181,10 @@ task.spawn(function()
 	end
 end)
 
--- Button logic
-toggleBtn.MouseButton1Click:Connect(function()
+-- Collect Button logic
+collectBtn.MouseButton1Click:Connect(function()
 	active = not active
-	toggleBtn.Text = active and "STOP COLLECTING" or "START COLLECTING"
+	collectBtn.Text = active and "STOP COLLECTING" or "START COLLECTING"
 	btnGradient.Color = active and ColorSequence.new{
 		ColorSequenceKeypoint.new(0, Color3.fromRGB(239, 68, 68)),
 		ColorSequenceKeypoint.new(1, Color3.fromRGB(185, 28, 28))
@@ -152,5 +194,29 @@ toggleBtn.MouseButton1Click:Connect(function()
 	}
 end)
 
+-- Auto Spin logic
+task.spawn(function()
+	while true do
+		if spinning then
+			pcall(function()
+				game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Net"):WaitForChild("RF/WheelSpin.Roll"):InvokeServer()
+			end)
+			task.wait(1)
+		else
+			task.wait(0.5)
+		end
+	end
+end)
 
-
+-- Spin Button logic
+spinBtn.MouseButton1Click:Connect(function()
+	spinning = not spinning
+	spinBtn.Text = spinning and "STOP SPINNING" or "START SPINNING"
+	spinGradient.Color = spinning and ColorSequence.new{
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(239, 68, 68)),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(185, 28, 28))
+	} or ColorSequence.new{
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 20, 147)),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(219, 39, 119))
+	}
+end)
