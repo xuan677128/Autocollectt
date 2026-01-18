@@ -13,8 +13,8 @@ gui.IgnoreGuiInset = true
 gui.Parent = player:WaitForChild("PlayerGui")
 
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 220, 0, 130)
-frame.Position = UDim2.new(0.5, -110, 0.15, 0)
+frame.Size = UDim2.new(0, 280, 0, 120)
+frame.Position = UDim2.new(0.5, -140, 0.15, 0)
 frame.BackgroundColor3 = Color3.fromRGB(255, 240, 245)
 frame.BorderSizePixel = 2
 frame.BorderColor3 = Color3.fromRGB(255, 105, 180)
@@ -31,29 +31,29 @@ gradient.Color = ColorSequence.new{
 gradient.Rotation = 45
 
 local titleBar = Instance.new("Frame", frame)
-titleBar.Size = UDim2.new(1, 0, 0, 35)
+titleBar.Size = UDim2.new(1, 0, 0, 40)
 titleBar.BackgroundColor3 = Color3.fromRGB(255, 105, 180)
 titleBar.BorderSizePixel = 0
 Instance.new("UICorner", titleBar).CornerRadius = UDim.new(0, 15)
 
 local title = Instance.new("TextLabel", titleBar)
-title.Size = UDim2.new(1, -10, 1, 0)
-title.Position = UDim2.new(0, 5, 0, 0)
+title.Size = UDim2.new(1, -50, 1, 0)
+title.Position = UDim2.new(0, 10, 0, 0)
 title.BackgroundTransparency = 1
-title.Text = "XUAN VULN AUTO COLLECT RADIOACTIVE COIN"
+title.Text = "XUAN AUTO COLLECT"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
-title.Font = Enum.Font.FredokaOne
-title.TextSize = 15
+title.Font = Enum.Font.GothamBold
+title.TextSize = 16
+title.TextXAlignment = Enum.TextXAlignment.Left
 
 local version = Instance.new("TextLabel", titleBar)
-version.Size = UDim2.new(0, 40, 0, 12)
-version.Position = UDim2.new(1, -45, 0, 22)
+version.Size = UDim2.new(0, 35, 1, 0)
+version.Position = UDim2.new(1, -40, 0, 0)
 version.BackgroundTransparency = 1
-version.Text = "v2.1"
+version.Text = "V2.1"
 version.TextColor3 = Color3.fromRGB(255, 255, 255)
-version.Font = Enum.Font.Gotham
-version.TextSize = 10
-version.TextTransparency = 0.3
+version.Font = Enum.Font.GothamBold
+version.TextSize = 11
 
 local shadow = Instance.new("ImageLabel", frame)
 shadow.Size = UDim2.new(1, 20, 1, 20)
@@ -64,12 +64,12 @@ shadow.ImageTransparency = 0.8
 shadow.ZIndex = 0
 
 local toggleBtn = Instance.new("TextButton", frame)
-toggleBtn.Size = UDim2.new(0.85, 0, 0, 45)
-toggleBtn.Position = UDim2.new(0.075, 0, 0, 55)
-toggleBtn.BackgroundColor3 = Color3.fromRGB(255, 20, 147)
-toggleBtn.TextColor3 = Color3.new(1,1,1)
+toggleBtn.Size = UDim2.new(0.9, 0, 0, 50)
+toggleBtn.Position = UDim2.new(0.05, 0, 0, 55)
+togggleBtn.BackgroundColor3 = Color3.fromRGB(255, 20, 147)
+toggleBtn.TextColor3 = Color3.new(0,0,0)
 toggleBtn.Font = Enum.Font.GothamBold
-toggleBtn.TextSize = 16
+toggleBtn.TextSize = 18
 toggleBtn.Text = "START COLLECTING"
 toggleBtn.AutoButtonColor = false
 Instance.new("UICorner", toggleBtn).CornerRadius = UDim.new(0, 10)
@@ -88,12 +88,12 @@ btnStroke.Transparency = 0.7
 
 -- Hover effect
 toggleBtn.MouseEnter:Connect(function()
-	toggleBtn.Size = UDim2.new(0.87, 0, 0, 47)
-	toggleBtn.Position = UDim2.new(0.065, 0, 0, 54)
+	toggleBtn.Size = UDim2.new(0.92, 0, 0, 52)
+	toggleBtn.Position = UDim2.new(0.04, 0, 0, 54)
 end)
 toggleBtn.MouseLeave:Connect(function()
-	toggleBtn.Size = UDim2.new(0.85, 0, 0, 45)
-	toggleBtn.Position = UDim2.new(0.075, 0, 0, 55)
+	toggleBtn.Size = UDim2.new(0.9, 0, 0, 50)
+	toggleBtn.Position = UDim2.new(0.05, 0, 0, 55)
 end)
 
 -- ================= FUNCTIONALITY LOGIC =================
