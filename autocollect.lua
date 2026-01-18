@@ -87,7 +87,7 @@ local character, humanoidRootPart
 local EventFolder = nil
 
 local PullDelay = 0.05
-local HeightOffset = 0
+local HeightOffset = 1
 local active = false
 
 -- Character handler (safe)
@@ -151,5 +151,6 @@ toggleBtn.MouseButton1Click:Connect(function()
 		ColorSequenceKeypoint.new(1, Color3.fromRGB(219, 39, 119))
 	}
 end)
+
 
 
